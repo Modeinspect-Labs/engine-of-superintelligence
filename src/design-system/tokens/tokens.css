@@ -1,0 +1,231 @@
+/**
+ * Nscale design tokens — the console's own semantic token set, light and
+ * dark. Names mirror the production console (`--color-primary-content`,
+ * `--color-secondary-background`, `--color-resources-serverlessInferencing`)
+ * as `--ns-*` so the library reads like the real one.
+ *
+ * Layer 1 — raw palette (--ns-zinc-*, --ns-purple-*): literal values, never
+ *           referenced by components directly.
+ * Layer 2 — semantic tokens (--ns-primary-*, --ns-secondary-*,
+ *           --ns-tertiary-*, --ns-{info,success,warning,error}-*,
+ *           --ns-hover-*, --ns-table-*, --ns-resources-*): what components
+ *           consume, exposed to Tailwind through @theme in globals.css.
+ *
+ * Everything sits on :root (and .dark) so an element lifted out of the
+ * page keeps its resolved values.
+ */
+
+:root {
+  /* ── Layer 1: palette ────────────────────────────────────────────── */
+  --ns-white: #ffffff;
+  --ns-black: #000000;
+  --ns-zinc-50: #fafafa;
+  --ns-zinc-100: #f4f4f5;
+  --ns-zinc-200: #e4e4e7;
+  --ns-zinc-300: #d4d4d8;
+  --ns-zinc-400: #a1a1aa;
+  --ns-zinc-500: #71717a;
+  --ns-zinc-600: #52525b;
+  --ns-zinc-700: #3f3f46;
+  --ns-zinc-800: #27272a;
+  --ns-zinc-900: #18181b;
+  --ns-zinc-950: #09090b;
+  --ns-slate-50: #f8fafc;
+  --ns-slate-100: #f1f5f9;
+  --ns-slate-200: #e2e8f0;
+  --ns-slate-700: #334155;
+  --ns-blue-700: #1d4ed8;
+  --ns-purple-900: #751a8c;
+  --ns-purple-950: #4a0f5a;
+
+  /* ── Layer 2: semantic ───────────────────────────────────────────── */
+  --ns-primary-core: #1d4ed8;
+  --ns-primary-content: #09090b;
+  --ns-primary-background: #ffffff;
+  --ns-primary-content-inverse: #ffffff;
+  --ns-primary-background-inverse: #18181b;
+  --ns-primary-border: #e4e4e7;
+  --ns-primary-border-inverse: #3f3f46;
+
+  --ns-secondary-content: #71717a;
+  --ns-secondary-background: #fafafa;
+  --ns-secondary-content-inverse: #a1a1aa;
+  --ns-secondary-background-inverse: #27272a;
+  --ns-secondary-border: #f4f4f5;
+  --ns-secondary-border-inverse: #3f3f46;
+
+  --ns-tertiary-content: #a1a1aa;
+  --ns-tertiary-background: #f4f4f5;
+  --ns-tertiary-background-inverse: #52525b;
+  --ns-tertiary-border: #fafafa;
+  --ns-tertiary-border-inverse: #09090b;
+
+  --ns-info-background: #dbeafe;
+  --ns-info-content: #1d4ed8;
+  --ns-info-border: #1d4ed8;
+  --ns-neutral-background: #f5f5f5;
+  --ns-neutral-content: #262626;
+  --ns-neutral-border: #a3a3a3;
+  --ns-success-background: #dcfce7;
+  --ns-success-content: #15803d;
+  --ns-success-border: #22c55e;
+  --ns-warning-background: #fef3c7;
+  --ns-warning-content: #b45309;
+  --ns-warning-border: #f59e0b;
+  --ns-error-background: #fee2e2;
+  --ns-error-content: #b91c1c;
+  --ns-error-border: #ef4444;
+
+  --ns-background-overlay: #09090b80;
+  --ns-background-primary-opacity: #ffffff0d;
+  --ns-hover-background: #1d4ed8;
+  --ns-hover-background-overlay: #0000000d;
+  --ns-hover-active: #e8e8e8;
+  --ns-hover-border-overlay: #00000033;
+  --ns-pressed-background-overlay: #0000001a;
+  --ns-pressed-active: #d4d4d4;
+  --ns-disabled-background: #f4f4f5;
+  --ns-active-background: #f8fafc;
+
+  --ns-table-hover-primary: #fafafa;
+  --ns-table-hover-secondary: #f4f4f5;
+  --ns-table-selected-primary: #f8fafc;
+  --ns-table-selected-secondary: #f1f5f9;
+
+  --ns-resources-kubernetes: #336ee5;
+  --ns-resources-slurm: #4c3da6;
+  --ns-resources-inference: #007281;
+  --ns-resources-compute: #2f5691;
+  --ns-resources-serverless: #751a8c;
+  --ns-resources-serverless-deep: #4a0f5a;
+  --ns-resources-fine-tuning: #b1460b;
+  --ns-resources-default: #334155;
+  --ns-resources-default-secondary: #f1f5f9;
+
+  --ns-extensions-background-purple: #f3e8ff;
+  --ns-extensions-content-purple: #3b0764;
+  --ns-extensions-background-indigo: #dbeafe;
+  --ns-extensions-content-indigo: #1d4ed8;
+  --ns-extensions-background-teal: #f0fdfa;
+  --ns-extensions-content-teal: #0f766e;
+  --ns-extensions-background-orange: #ffedd5;
+  --ns-extensions-content-orange: #c2410c;
+  --ns-extensions-background-pink: #fce7f3;
+  --ns-extensions-content-pink: #be185d;
+
+  /* Dark banners (free-credit strip, GPU clusters hero) stay dark in both themes */
+  --ns-banner-background: #09090b;
+  --ns-banner-background-raised: #18181b;
+  --ns-banner-content: #ffffff;
+  --ns-banner-content-muted: #a1a1aa;
+  --ns-banner-border: #27272a;
+
+  /* Code block (the console's dark snippet surface, both themes) */
+  --ns-code-background: #1c1c21;
+  --ns-code-content: #f4f4f5;
+  --ns-code-string: #f29a4e;
+  --ns-code-muted: #71717a;
+
+  /* Chart marks (resolved to attributes by useTokenValues) */
+  --ns-chart-serverless: #751a8c;
+  --ns-chart-track: #e4e4e7;
+  --ns-chart-grid: #f4f4f5;
+
+  /* Elevation */
+  --ns-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ns-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ns-shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --ns-shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Motion */
+  --ns-duration-fast: 150ms;
+  --ns-duration-medium: 200ms;
+  --ns-duration-slow: 300ms;
+  --ns-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+}
+
+.dark {
+  --ns-primary-core: #3b82f6;
+  --ns-primary-content: #ffffff;
+  --ns-primary-background: #18181b;
+  --ns-primary-content-inverse: #000000;
+  --ns-primary-background-inverse: #f4f4f5;
+  --ns-primary-border: #27272a;
+  --ns-primary-border-inverse: #3f3f46;
+
+  --ns-secondary-content: #a1a1aa;
+  --ns-secondary-background: #09090b;
+  --ns-secondary-content-inverse: #3f3f46;
+  --ns-secondary-background-inverse: #e4e4e7;
+  --ns-secondary-border: #27272a;
+  --ns-secondary-border-inverse: #3f3f46;
+
+  --ns-tertiary-content: #71717a;
+  --ns-tertiary-background: #27272a;
+  --ns-tertiary-background-inverse: #a1a1aa;
+  --ns-tertiary-border: #3f3f46;
+  --ns-tertiary-border-inverse: #3f3f46;
+
+  --ns-info-background: #172554;
+  --ns-info-content: #60a5fa;
+  --ns-info-border: #3b82f6;
+  --ns-neutral-background: #262626;
+  --ns-neutral-content: #d4d4d4;
+  --ns-neutral-border: #525252;
+  --ns-success-background: #052e16;
+  --ns-success-content: #4ade80;
+  --ns-success-border: #22c55e;
+  --ns-warning-background: #451a03;
+  --ns-warning-content: #fbbf24;
+  --ns-warning-border: #f59e0b;
+  --ns-error-background: #450a0a;
+  --ns-error-content: #f87171;
+  --ns-error-border: #ef4444;
+
+  --ns-background-overlay: #09090b80;
+  --ns-background-primary-opacity: #0000000d;
+  --ns-hover-background: #3b82f6;
+  --ns-hover-background-overlay: #ffffff1a;
+  --ns-hover-active: #222226;
+  --ns-hover-border-overlay: #ffffff1a;
+  --ns-pressed-background-overlay: #ffffff26;
+  --ns-pressed-active: #2c2c30;
+  --ns-disabled-background: #222222;
+  --ns-active-background: #0f172a;
+
+  --ns-table-hover-primary: #27272a;
+  --ns-table-hover-secondary: #18181b;
+  --ns-table-selected-primary: #1e293b;
+  --ns-table-selected-secondary: #1e293b;
+
+  --ns-resources-default-secondary: #e2e8f0;
+
+  --ns-extensions-background-purple: #3b0764;
+  --ns-extensions-content-purple: #faf5ff;
+  --ns-extensions-background-indigo: #60a5fa;
+  --ns-extensions-content-indigo: #172554;
+  --ns-extensions-background-teal: #134e4a;
+  --ns-extensions-content-teal: #ccfbf1;
+  --ns-extensions-background-orange: #431407;
+  --ns-extensions-content-orange: #fb923c;
+  --ns-extensions-background-pink: #500724;
+  --ns-extensions-content-pink: #f472b6;
+
+  --ns-chart-track: #3f3f46;
+  --ns-chart-grid: #27272a;
+
+  --ns-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --ns-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --ns-shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --ns-shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6);
+
+  color-scheme: dark;
+}

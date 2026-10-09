@@ -1,0 +1,231 @@
+@import "tailwindcss";
+@import "../design-system/tokens/tokens.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Bridge: expose the Nscale semantic tokens to Tailwind as utilities.
+ * Components use these class names only — never raw hex, never the palette.
+ *
+ *   text-primary-content / text-secondary-content / text-tertiary-content
+ *   text-primary-content-inverse / text-secondary-content-inverse
+ *   bg-primary-background / bg-secondary-background / bg-tertiary-background
+ *   bg-primary-background-inverse / bg-secondary-background-inverse
+ *   border-primary-border / border-secondary-border / border-tertiary-border
+ *   border-primary-border-inverse
+ *   bg-info-background text-info-content … (info, success, warning, error)
+ *   bg-hover-overlay / bg-pressed-overlay / bg-hover-active / bg-pressed-active
+ *   bg-table-hover-primary / bg-table-hover-secondary
+ *   bg-resources-serverless / bg-resources-kubernetes / bg-resources-slurm …
+ *   bg-code-background text-code-content text-code-string
+ *   shadow-xs / shadow-md / shadow-lg / shadow-xl
+ *   font-sans (system) / font-mono (system mono)
+ */
+@theme inline {
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  --color-primary-core: var(--ns-primary-core);
+  --color-primary-content: var(--ns-primary-content);
+  --color-primary-background: var(--ns-primary-background);
+  --color-primary-content-inverse: var(--ns-primary-content-inverse);
+  --color-primary-background-inverse: var(--ns-primary-background-inverse);
+  --color-primary-border: var(--ns-primary-border);
+  --color-primary-border-inverse: var(--ns-primary-border-inverse);
+
+  --color-secondary-content: var(--ns-secondary-content);
+  --color-secondary-background: var(--ns-secondary-background);
+  --color-secondary-content-inverse: var(--ns-secondary-content-inverse);
+  --color-secondary-background-inverse: var(--ns-secondary-background-inverse);
+  --color-secondary-border: var(--ns-secondary-border);
+  --color-secondary-border-inverse: var(--ns-secondary-border-inverse);
+
+  --color-tertiary-content: var(--ns-tertiary-content);
+  --color-tertiary-background: var(--ns-tertiary-background);
+  --color-tertiary-background-inverse: var(--ns-tertiary-background-inverse);
+  --color-tertiary-border: var(--ns-tertiary-border);
+  --color-tertiary-border-inverse: var(--ns-tertiary-border-inverse);
+
+  --color-info-background: var(--ns-info-background);
+  --color-info-content: var(--ns-info-content);
+  --color-info-border: var(--ns-info-border);
+  --color-neutral-background: var(--ns-neutral-background);
+  --color-neutral-content: var(--ns-neutral-content);
+  --color-neutral-border: var(--ns-neutral-border);
+  --color-success-background: var(--ns-success-background);
+  --color-success-content: var(--ns-success-content);
+  --color-success-border: var(--ns-success-border);
+  --color-warning-background: var(--ns-warning-background);
+  --color-warning-content: var(--ns-warning-content);
+  --color-warning-border: var(--ns-warning-border);
+  --color-error-background: var(--ns-error-background);
+  --color-error-content: var(--ns-error-content);
+  --color-error-border: var(--ns-error-border);
+
+  --color-overlay: var(--ns-background-overlay);
+  --color-primary-opacity: var(--ns-background-primary-opacity);
+  --color-hover-overlay: var(--ns-hover-background-overlay);
+  --color-hover-active: var(--ns-hover-active);
+  --color-hover-border-overlay: var(--ns-hover-border-overlay);
+  --color-pressed-overlay: var(--ns-pressed-background-overlay);
+  --color-pressed-active: var(--ns-pressed-active);
+  --color-disabled-background: var(--ns-disabled-background);
+  --color-active-background: var(--ns-active-background);
+
+  --color-table-hover-primary: var(--ns-table-hover-primary);
+  --color-table-hover-secondary: var(--ns-table-hover-secondary);
+  --color-table-selected-primary: var(--ns-table-selected-primary);
+  --color-table-selected-secondary: var(--ns-table-selected-secondary);
+
+  --color-resources-kubernetes: var(--ns-resources-kubernetes);
+  --color-resources-slurm: var(--ns-resources-slurm);
+  --color-resources-inference: var(--ns-resources-inference);
+  --color-resources-compute: var(--ns-resources-compute);
+  --color-resources-serverless: var(--ns-resources-serverless);
+  --color-resources-serverless-deep: var(--ns-resources-serverless-deep);
+  --color-resources-fine-tuning: var(--ns-resources-fine-tuning);
+  --color-resources-default: var(--ns-resources-default);
+  --color-resources-default-secondary: var(--ns-resources-default-secondary);
+
+  --color-extensions-background-purple: var(--ns-extensions-background-purple);
+  --color-extensions-content-purple: var(--ns-extensions-content-purple);
+  --color-extensions-background-indigo: var(--ns-extensions-background-indigo);
+  --color-extensions-content-indigo: var(--ns-extensions-content-indigo);
+  --color-extensions-background-teal: var(--ns-extensions-background-teal);
+  --color-extensions-content-teal: var(--ns-extensions-content-teal);
+  --color-extensions-background-orange: var(--ns-extensions-background-orange);
+  --color-extensions-content-orange: var(--ns-extensions-content-orange);
+  --color-extensions-background-pink: var(--ns-extensions-background-pink);
+  --color-extensions-content-pink: var(--ns-extensions-content-pink);
+
+  --color-banner-background: var(--ns-banner-background);
+  --color-banner-background-raised: var(--ns-banner-background-raised);
+  --color-banner-content: var(--ns-banner-content);
+  --color-banner-content-muted: var(--ns-banner-content-muted);
+  --color-banner-border: var(--ns-banner-border);
+
+  --color-code-background: var(--ns-code-background);
+  --color-code-content: var(--ns-code-content);
+  --color-code-string: var(--ns-code-string);
+  --color-code-muted: var(--ns-code-muted);
+
+  --color-chart-serverless: var(--ns-chart-serverless);
+  --color-chart-track: var(--ns-chart-track);
+  --color-chart-grid: var(--ns-chart-grid);
+
+  --shadow-xs: var(--ns-shadow-xs);
+  --shadow-md: var(--ns-shadow-md);
+  --shadow-lg: var(--ns-shadow-lg);
+  --shadow-xl: var(--ns-shadow-xl);
+
+  --duration-fast: var(--ns-duration-fast);
+  --duration-medium: var(--ns-duration-medium);
+  --duration-slow: var(--ns-duration-slow);
+
+  --animate-fade-in: fade-in var(--ns-duration-medium) var(--ns-ease) both;
+  --animate-card-in: card-in var(--ns-duration-medium) var(--ns-ease) both;
+  --animate-modal-in: modal-in var(--ns-duration-medium) var(--ns-ease) both;
+  --animate-menu-in: menu-in var(--ns-duration-fast) var(--ns-ease) both;
+  --animate-toast-in: toast-in var(--ns-duration-medium) var(--ns-ease) both;
+  --animate-shimmer: shimmer 3s infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes card-in {
+    from {
+      opacity: 0.2;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--ns-primary-content);
+    background-color: var(--ns-secondary-background);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-size: 14px;
+    line-height: 20px;
+    min-height: 100dvh;
+    color: var(--ns-primary-content);
+    background-color: var(--ns-secondary-background);
+    background-image: url("/background-light.svg");
+    background-repeat: no-repeat;
+    background-position: right top;
+  }
+  .dark body {
+    background-image: none;
+  }
+  ::selection {
+    background-color: var(--ns-extensions-background-purple);
+  }
+  *:focus-visible {
+    outline: 2px solid var(--ns-primary-core);
+    outline-offset: 1px;
+  }
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
