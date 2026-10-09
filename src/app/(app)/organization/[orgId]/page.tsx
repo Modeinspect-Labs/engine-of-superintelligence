@@ -40,7 +40,6 @@ export default function DashboardPage() {
   const usageEvents = useNscaleStore((s) => s.usageEvents);
   const onboarding = useNscaleStore((s) => s.onboarding);
   const redeemed = useNscaleStore((s) => s.freeCreditRedeemed);
-  const redeem = useNscaleStore((s) => s.redeemFreeCredit);
   const openTokenModal = useUiStore((s) => s.setTokenModalOpen);
 
   const since = new Date(TODAY);
@@ -79,13 +78,6 @@ export default function DashboardPage() {
               To help you get started, we&apos;ve given you a helping hand.
             </p>
           </div>
-          <Button
-            variant="inverse"
-            onClick={redeem}
-            data-action="redeem-credit"
-          >
-            Redeem credit
-          </Button>
         </Card>
       )}
 
